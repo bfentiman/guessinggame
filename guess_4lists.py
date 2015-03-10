@@ -23,9 +23,10 @@ while anothergo:
     while not finished:
         # is it an empty list?
         if len(words) == 0: # list is empty
+            # no questions to ask, so just learn an answer
             name = raw_input("What is it? ")
             
-            # add item to the tree
+            # add new item to the tree
             words.append(name)
             yes.append(None)
             no.append(None)
@@ -39,7 +40,8 @@ while anothergo:
                 # congratulate myself
                 print("I guessed it!")
             else: # I didn't guess it
-                print("I didn't guess it")
+                # need to learn a question and an answer
+                print("I didn't guess it!")
                 name = raw_input("What is it? ")
                 # ask distinguising question
                 q = raw_input("Please give a question to distinguish between " + words[pos] + " and " + name + ":" )
@@ -70,14 +72,18 @@ while anothergo:
             finished = True
 
         else: # It must be a branch node with two outcomes
-            #TODO: ask multi choice question
-            #   yes: take yes branch
-            #   no:  take no branch
+            # Show some diagnostics
             print("Branch node: pos:" + str(pos))
             print("word:"  + words[pos])
             print("yes:"   + str(yes[pos]) + " which is:" + words[yes[pos]])
             print("no:"    + str(no[pos])  + " which is:" + words[no[pos]])
-            finished = True
+
+            # ask the question
+            a = raw_input(words[pos] + "? ")
+            if a == "yes":
+                pos = yes[pos]
+            else:
+                pos = no[pos]
         
 
     again = raw_input("another go?")
