@@ -40,6 +40,14 @@ while anothergo:
         # is it an empty list?
         if len(names) == 0: # list is empty
             name = raw_input("What is it?")
+            
+            # add item to the tree
+            names.append(name)
+            questions.append(None)
+            yes.append(None)
+            no.append(None)
+            finished = True
+        else:
             finished = True
 
     again = raw_input("another go?")
