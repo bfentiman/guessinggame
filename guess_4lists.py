@@ -24,7 +24,7 @@ while anothergo:
     while not finished:
         # is it an empty list?
         if len(names) == 0: # list is empty
-            name = raw_input("What is it?")
+            name = raw_input("What is it? ")
             
             # add item to the tree
             names.append(name)
@@ -35,16 +35,22 @@ while anothergo:
             
         elif questions[pos] == None: # is it a leaf node?
             # ask a terminating question
-            gotit = raw_input("Is it a " + names[pos] + "?")
+            gotit = raw_input("Is it a " + names[pos] + "? ")
             # did I get it right?
             if gotit == "yes":
                 # congratulate myself
                 print("I guessed it!")
             else: # I didn't guess it
                 print("I didn't guess it")
-                name = raw_input("What is it?")
+                name = raw_input("What is it? ")
                 # ask distinguising question
+                q = raw_input("Please give a question to distinguish between " + names[pos] + " and " + name+ ":" )
                 # ask answer for your new item
+                a = raw_input("What is the answer to this question for " + name + "?" )
+                #TODO: add new leaf node for new name
+                #TODO: move old leaf node to a new node
+                #TODO: change leaf node to a branch node, to join two leaf nodes
+                #make sure the y/n branches are correct
             finished = True
 
         else: # It must be a branch node with two outcomes
