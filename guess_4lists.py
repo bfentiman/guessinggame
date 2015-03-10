@@ -72,12 +72,6 @@ while anothergo:
             finished = True
 
         else: # It must be a branch node with two outcomes
-            # Show some diagnostics
-            print("Branch node: pos:" + str(pos))
-            print("word:"  + words[pos])
-            print("yes:"   + str(yes[pos]) + " which is:" + words[yes[pos]])
-            print("no:"    + str(no[pos])  + " which is:" + words[no[pos]])
-
             # ask the question
             a = raw_input(words[pos] + "? ")
             if a == "yes":
