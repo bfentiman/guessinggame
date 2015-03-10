@@ -1,7 +1,7 @@
 # guess_4lists.py  10/03/2015  D.J.Whale
 #
 # A guessing game, using a binary tree structure
-# The binary tree is implemented using 4 lists
+# The binary tree is implemented using 3 lists
 # This is a version for children who don't know about lists of lists yet
 
 #TODO load file from disk
@@ -14,7 +14,7 @@ no        = []
 anothergo = True
 while anothergo:
     # display banner
-    print("GUESSING GAME")
+    print("\nGUESSING GAME")
     print("Think of an animal")
 
     finished = False
