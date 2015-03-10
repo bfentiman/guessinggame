@@ -19,7 +19,7 @@ while anothergo:
     print("Think of an animal")
 
     finished = False
-    #pos = 0
+    pos = 0
     
     while not finished:
         # is it an empty list?
@@ -33,7 +33,7 @@ while anothergo:
             no.append(None)
             finished = True
             
-        else: # is it a leaf node?
+        elif questions[pos] == None: # is it a leaf node?
             #   ask "is it a"
             #   did I get it right?
             #       congratulate myself
@@ -42,11 +42,12 @@ while anothergo:
             #       ask "distinguishing question"
             #       ask "answer for your new item"
             finished = True
-            
-        # is pos a branch node?
-        #   ask multi choice question
-        #   yes: take yes branch
-        #   no:  take no branch
+
+        else: # It must be a branch node with two outcomes
+            #   ask multi choice question
+            #   yes: take yes branch
+            #   no:  take no branch
+            finished = True
         
 
 
