@@ -1,4 +1,4 @@
-# guess_4lists.py  10/03/2015  D.J.Whale
+# guess_3lists.py  10/03/2015  D.J.Whale
 #
 # A guessing game, using a binary tree structure
 # The binary tree is implemented using 3 lists
