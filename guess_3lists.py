@@ -67,7 +67,7 @@ while anothergo:
                     no[pos]  = len(words)-2
                 else: # no branch goes to new item
                     no[pos]  = len(words)-1
-                    yes[pos]= len(words)-2
+                    yes[pos] = len(words)-2
 
             finished = True
 
@@ -80,11 +80,11 @@ while anothergo:
                 pos = no[pos]
         
 
-    again = raw_input("another go?")
+    again = raw_input("another go? ")
     if again != "yes":
         anothergo = False
  
-print("Thanks for playing the game")
+print("Thanks for playing the game!")
 
 #TODO save file to disk
 
