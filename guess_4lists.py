@@ -4,16 +4,22 @@
 # The binary tree is implemented using 4 lists
 # This is a version for children who don't know about lists of lists yet
 
-import time
+#TODO load file from disk
 
-# load file from disk
+# the tree starts off empty
+names     = []
+questions = []
+yes       = []
+no        = []
 
 anothergo = True
 while anothergo:
     # display banner
+    print("GUESSING GAME")
+    print("Think of an animal")
 
     finished = False
-    pos = 0
+    #pos = 0
     
     while not finished:
         # is pos a branch node?
@@ -21,8 +27,8 @@ while anothergo:
         #   yes: take yes branch
         #   no:  take no branch
         
-        # else must be a leaf node
-        #   ask terminating question
+        # is it a leaf node?
+        #   ask "is it a"
         #   did I get it right?
         #       congratulate myself
         #   not right
@@ -31,10 +37,17 @@ while anothergo:
         #       ask "answer for your new item"
         #   finished = True
 
-    # ask "another go"
-    # if no, anothergo = False
+        # is it an empty list?
+        #   ask "what is it?"
+        #   finished = True
+        finished = True
 
-# Thanks for playing the game
-# save file to disk
+    again = raw_input("another go?")
+    if again != "yes":
+        anothergo = False
+ 
+print("Thanks for playing the game")
+
+#TODO save file to disk
 
     
