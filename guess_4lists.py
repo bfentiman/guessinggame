@@ -38,9 +38,9 @@ while anothergo:
         #   finished = True
 
         # is it an empty list?
-        #   ask "what is it?"
-        #   finished = True
-        finished = True
+        if len(names) == 0: # list is empty
+            name = raw_input("What is it?")
+            finished = True
 
     again = raw_input("another go?")
     if again != "yes":
