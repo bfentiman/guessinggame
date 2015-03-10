@@ -46,21 +46,46 @@ while anothergo:
                 # ask distinguising question
                 q = raw_input("Please give a question to distinguish between " + names[pos] + " and " + name+ ":" )
                 # ask answer for your new item
-                a = raw_input("What is the answer to this question for " + name + "?" )
-                #TODO: add new leaf node for new name
-                #TODO: move old leaf node to a new node
-                #TODO: change leaf node to a branch node, to join two leaf nodes
-                #make sure the y/n branches are correct
+                a = raw_input("What is the answer to this question for " + name + "? ")
+                
+                # Move existing leaf node to a new node
+                names.append(names[pos])
+                questions.append(None)
+                yes.append(None)
+                no.append(None)
+                
+                #add new leaf node for new name
+                names.append(name)
+                questions.append(None)
+                yes.append(None)
+                no.append(None)
+
+                # Change old leaf node into a branch node with the question
+                names[pos] = None
+                questions[pos] = q
+
+                # wire up the yes/no branches correctly
+                if a == "yes": # yes branch goes to new item
+                    yes[pos] = len(names)-1
+                    no[pos]  = len(names)-2
+                else: # no branch goes to new item
+                    no[pos]  = len(names)-1
+                    yes[pos]= len(names)-2
+
             finished = True
 
         else: # It must be a branch node with two outcomes
-            #   ask multi choice question
+            #TODO: ask multi choice question
             #   yes: take yes branch
             #   no:  take no branch
+            print("Branch node: pos:" + str(pos))
+            print("q:" + questions[pos])
+            print("yes:" + str(yes[pos]))
+            print("no:"  + str(no[pos]))
+            print("questions:" + str(questions))
+            print("names:" + str(names))
             finished = True
         
-
-
 
     again = raw_input("another go?")
     if again != "yes":
