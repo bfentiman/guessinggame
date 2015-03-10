@@ -22,21 +22,6 @@ while anothergo:
     #pos = 0
     
     while not finished:
-        # is pos a branch node?
-        #   ask multi choice question
-        #   yes: take yes branch
-        #   no:  take no branch
-        
-        # is it a leaf node?
-        #   ask "is it a"
-        #   did I get it right?
-        #       congratulate myself
-        #   not right
-        #       ask "what is it"
-        #       ask "distinguishing question"
-        #       ask "answer for your new item"
-        #   finished = True
-
         # is it an empty list?
         if len(names) == 0: # list is empty
             name = raw_input("What is it?")
@@ -47,8 +32,24 @@ while anothergo:
             yes.append(None)
             no.append(None)
             finished = True
-        else:
+            
+        else: # is it a leaf node?
+            #   ask "is it a"
+            #   did I get it right?
+            #       congratulate myself
+            #   not right
+            #       ask "what is it"
+            #       ask "distinguishing question"
+            #       ask "answer for your new item"
             finished = True
+            
+        # is pos a branch node?
+        #   ask multi choice question
+        #   yes: take yes branch
+        #   no:  take no branch
+        
+
+
 
     again = raw_input("another go?")
     if again != "yes":
