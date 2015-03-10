@@ -75,11 +75,8 @@ while anothergo:
             #   no:  take no branch
             print("Branch node: pos:" + str(pos))
             print("word:"  + words[pos])
-            print("yes:"   + str(yes[pos]))
-            print("no:"    + str(no[pos]))
-            print("words:" + str(words))
-            print("yes:"   + str(yes))
-            print("no:"    + str(no))
+            print("yes:"   + str(yes[pos]) + " which is:" + words[yes[pos]])
+            print("no:"    + str(no[pos])  + " which is:" + words[no[pos]])
             finished = True
         
 
