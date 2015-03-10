@@ -34,13 +34,17 @@ while anothergo:
             finished = True
             
         elif questions[pos] == None: # is it a leaf node?
-            #   ask "is it a"
-            #   did I get it right?
-            #       congratulate myself
-            #   not right
-            #       ask "what is it"
-            #       ask "distinguishing question"
-            #       ask "answer for your new item"
+            # ask a terminating question
+            gotit = raw_input("Is it a " + names[pos] + "?")
+            # did I get it right?
+            if gotit == "yes":
+                # congratulate myself
+                print("I guessed it!")
+            else: # I didn't guess it
+                print("I didn't guess it")
+                name = raw_input("What is it?")
+                # ask distinguising question
+                # ask answer for your new item
             finished = True
 
         else: # It must be a branch node with two outcomes
