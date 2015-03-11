@@ -132,16 +132,19 @@ while anothergo:
                 lastpos = len(words)-2 # pos of last asked leaf
                 newpos  = len(words)-1 # pos of new answer leaf
                 
-                # Change old leaf node into a branch node with the question
+                # Change old leaf node into a branch node with the question and two answers
                 words[pos] = q
 
                 # wire up the yes/no branches correctly
-                if a == "yes": # yes branch goes to new item
-                    yes[pos] = newpos
-                    no[pos]  = lastpos
-                else: # no branch goes to new item
-                    no[pos]  = newpos
-                    yes[pos] = lastpos
+                if a == "yes":
+                    yespos = newpos
+                    nopos  = lastpos
+                else:
+                    yespos = lastpos
+                    nopos  = newpos                    
+
+                yes[pos] = yespos
+                no[pos]  = nopos
 
             finished = True
 
