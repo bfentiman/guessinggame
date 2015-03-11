@@ -90,6 +90,22 @@ def makeBranch(pos, question, yespos, nopos):
     no[pos]    = nopos
 
 
+def restructureTree(pos, question, name, answer):
+    """Restructure the tree at pos to insert a new item"""
+    appendLeaf(words[pos]) # move existing leaf node to a new node
+    appendLeaf(name) # add a new leaf node for the new name
+
+    # work out positions of two leafs, for ease of use later
+    lastpos = len(words)-2 # pos of last asked leaf
+    newpos  = len(words)-1 # pos of new answer leaf
+
+    # Change old leaf node into a branch node with the question and two answers
+    if a == "yes":
+        makeBranch(pos, q, newpos, lastpos)
+    else:
+        makeBranch(pos, q, lastpos, newpos)
+
+
 # MAIN PROGRAM
 
 load(DATABASE_NAME)
@@ -115,6 +131,7 @@ while anothergo:
         elif isLeaf(pos):
             # ask a terminating question
             gotit = raw_input("Is it a " + words[pos] + "? ")
+
             # did I get it right?
             if gotit == "yes":
                 # congratulate myself
@@ -124,31 +141,23 @@ while anothergo:
                 # need to learn a question and an answer
                 print("I didn't guess it!")
                 name = raw_input("What is it? ")
+
                 # ask distinguising question
                 q = raw_input("Please give a question to distinguish between " + words[pos] + " and " + name + ":" )
+
                 # ask answer for your new item
                 a = raw_input("What is the answer to this question for " + name + "? ")
 
                 # Restructure the tree to account for question and new answer
+                restructureTree(pos, q, name, a)
                 
-                appendLeaf(words[pos]) # move existing leaf node to a new node
-                appendLeaf(name) # add a new leaf node for the new name
-
-                # work out positions of two leafs, for ease of use later
-                lastpos = len(words)-2 # pos of last asked leaf
-                newpos  = len(words)-1 # pos of new answer leaf
-
-                # Change old leaf node into a branch node with the question and two answers
-                if a == "yes":
-                    makeBranch(pos, q, newpos, lastpos)
-                else:
-                    makeBranch(pos, q, lastpos, newpos)
-
             finished = True
 
         else: # must be a branch node with two outcomes
             # ask the question
             a = raw_input(words[pos] + "? ")
+
+            # walk the tree based on the answer
             if a == "yes":
                 pos = yes[pos]
             else:
