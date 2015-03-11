@@ -106,6 +106,16 @@ def restructureTree(pos, question, name, answer):
         makeBranch(pos, q, lastpos, newpos)
 
 
+def walkTree(pos, answer):
+    """Walk the tree from this node, based on the answer.
+       Returns the new position in the tree"""
+    if a == "yes":
+        newpos = yes[pos]
+    else:
+        newpos = no[pos]
+    return newpos
+
+
 # MAIN PROGRAM
 
 load(DATABASE_NAME)
@@ -158,10 +168,7 @@ while anothergo:
             a = raw_input(words[pos] + "? ")
 
             # walk the tree based on the answer
-            if a == "yes":
-                pos = yes[pos]
-            else:
-                pos = no[pos]
+            pos = walkTree(pos, a)
         
 
     again = raw_input("another go? ")
