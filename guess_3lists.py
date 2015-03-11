@@ -11,30 +11,67 @@ words     = []
 yes       = []
 no        = []
 
-# load file from disk
-print("Loading database...")
-try:
-    f = open(DATABASE_NAME)
-    for line in f.readlines():
-        line = line.strip() # remove newline
-        print(line)
-        word, ypos, npos = line.split(",", 2)
-        words.append(word)
-        if ypos == "None":
-            yes.append(None)
-        else:
-            yes.append(int(ypos))
-        if npos == "None":
-            no.append(None)
-        else:
-            no.append(int(npos))
+def load(filename):
+    """Load from a named database"""
+    global words, yes, no    
+
+    print("Loading database...")
+    try:
+        f = open(filename)
+        for line in f.readlines():
+            line = line.strip() # remove newline
+            print(line)
+            word, ypos, npos = line.split(",", 2)
+            words.append(word)
+            if ypos == "None":
+                yes.append(None)
+            else:
+                yes.append(int(ypos))
+            if npos == "None":
+                no.append(None)
+            else:
+                no.append(int(npos))
+        f.close()
+        print("Done")
+        
+    except IOError:
+        print("No database, starting empty")
+
+
+def save(filename):
+    """Save the database to a file"""
+
+    print("Saving data base...")
+    f = open(DATABASE_NAME, "wt")
+    for pos in range(len(words)):
+        word = words[pos]
+        y    = yes[pos]
+        n    = no[pos]
+        line = word + "," + str(y) + "," + str(n) + "\n"
+        f.write(line)
     f.close()
-    print("Done")
-    
-except IOError:
-    print("No database, starting empty")
+
+    print("Database saved")
 
 
+def isDatabaseEmpty():
+    """Work out if the database is empty or not"""
+    if len(words) == 0:
+        return True
+    return False
+
+
+def isLeaf(pos):
+    """Is this node a leaf node?"""
+    if yes[pos] == None:
+        return True
+    return False
+
+
+
+# MAIN PROGRAM
+
+load(DATABASE_NAME)
 
 # Main game loop
 anothergo = True
@@ -51,7 +88,7 @@ while anothergo:
         # Ask the next question
         
         # is it an empty list?
-        if len(words) == 0: # list is empty
+        if isDatabaseEmpty():
             # no questions to ask, so just learn an answer
             name = raw_input("What is it? ")
             
@@ -62,7 +99,7 @@ while anothergo:
             finished = True
 
         # is it a leaf node?
-        elif yes[pos] == None:
+        elif isLeaf(pos):
             # ask a terminating question
             gotit = raw_input("Is it a " + words[pos] + "? ")
             # did I get it right?
@@ -118,18 +155,6 @@ while anothergo:
  
 print("Thanks for playing the game!")
 
-# save file to disk
-
-print("Saving data base...")
-f = open(DATABASE_NAME, "wt")
-for pos in range(len(words)):
-    word = words[pos]
-    y    = yes[pos]
-    n    = no[pos]
-    line = word + "," + str(y) + "," + str(n) + "\n"
-    f.write(line)
-f.close()
-
-print("Database saved")
+save(DATABASE_NAME)
 
     
