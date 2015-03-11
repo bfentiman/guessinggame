@@ -4,13 +4,39 @@
 # The binary tree is implemented using 3 lists
 # This is a version for children who don't know about lists of lists yet
 
-#TODO load file from disk
+DATABASE_NAME = "animals.txt"
 
 # the tree starts off empty
 words     = []
 yes       = []
 no        = []
 
+# load file from disk
+print("Loading database...")
+try:
+    f = open(DATABASE_NAME)
+    for line in f.readlines():
+        line = line.strip() # remove newline
+        print(line)
+        word, ypos, npos = line.split(",", 2)
+        words.append(word)
+        if ypos == "None":
+            yes.append(None)
+        else:
+            yes.append(int(ypos))
+        if npos == "None":
+            no.append(None)
+        else:
+            no.append(int(npos))
+    f.close()
+    print("Done")
+    
+except IOError:
+    print("No database, starting empty")
+
+
+
+# Main game loop
 anothergo = True
 while anothergo:
     # display banner
@@ -19,8 +45,11 @@ while anothergo:
 
     finished = False
     pos = 0
-    
+
+    # Question asking loop
     while not finished:
+        # Ask the next question
+        
         # is it an empty list?
         if len(words) == 0: # list is empty
             # no questions to ask, so just learn an answer
@@ -31,14 +60,16 @@ while anothergo:
             yes.append(None)
             no.append(None)
             finished = True
-            
-        elif yes[pos] == None: # is it a leaf node?
+
+        # is it a leaf node?
+        elif yes[pos] == None:
             # ask a terminating question
             gotit = raw_input("Is it a " + words[pos] + "? ")
             # did I get it right?
             if gotit == "yes":
                 # congratulate myself
                 print("I guessed it!")
+                
             else: # I didn't guess it
                 # need to learn a question and an answer
                 print("I didn't guess it!")
@@ -71,7 +102,8 @@ while anothergo:
 
             finished = True
 
-        else: # It must be a branch node with two outcomes
+        # It must be a branch node with two outcomes
+        else:
             # ask the question
             a = raw_input(words[pos] + "? ")
             if a == "yes":
@@ -86,6 +118,18 @@ while anothergo:
  
 print("Thanks for playing the game!")
 
-#TODO save file to disk
+# save file to disk
+
+print("Saving data base...")
+f = open(DATABASE_NAME, "wt")
+for pos in range(len(words)):
+    word = words[pos]
+    y    = yes[pos]
+    n    = no[pos]
+    line = word + "," + str(y) + "," + str(n) + "\n"
+    f.write(line)
+f.close()
+
+print("Database saved")
 
     
