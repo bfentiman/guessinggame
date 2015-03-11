@@ -79,8 +79,15 @@ def appendLeaf(name):
     global words, yes, no
     words.append(name)
     yes.append(None)
-    no.append(None)    
+    no.append(None)
 
+
+def makeBranch(pos, question, yespos, nopos):
+    """Turn node at pos into a branch node"""
+    global wirds, yes, no
+    words[pos] = q
+    yes[pos]   = yespos
+    no[pos]    = nopos
 
 
 # MAIN PROGRAM
@@ -124,7 +131,7 @@ while anothergo:
 
                 # Restructure the tree to account for question and new answer
                 
-                appendLeaf(words[pos]) # move existin leaf node to a new node
+                appendLeaf(words[pos]) # move existing leaf node to a new node
                 appendLeaf(name) # add a new leaf node for the new name
 
                 # work out positions of two leafs, for ease of use later
@@ -133,16 +140,9 @@ while anothergo:
 
                 # Change old leaf node into a branch node with the question and two answers
                 if a == "yes":
-                    yespos = newpos
-                    nopos  = lastpos
+                    makeBranch(pos, q, newpos, lastpos)
                 else:
-                    yespos = lastpos
-                    nopos  = newpos
-
-                #makeBranch(pos, q, yespos, nopos)
-                words[pos] = q
-                yes[pos]   = yespos
-                no[pos]    = nopos
+                    makeBranch(pos, q, lastpos, newpos)
 
             finished = True
 
