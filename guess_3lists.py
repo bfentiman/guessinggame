@@ -52,6 +52,12 @@ def save(filename):
     f.close()
 
     print("Database saved")
+    
+
+def banner():
+    """Display a friendly banner on the screen"""
+    print("\nGUESSING GAME")
+    print("Think of an animal")    
 
 
 def isDatabaseEmpty():
@@ -68,6 +74,14 @@ def isLeaf(pos):
     return False
 
 
+def appendLeaf(name):
+    """Add this name as a leaf node to end of database"""
+    global words, yes, no
+    words.append(name)
+    yes.append(None)
+    no.append(None)    
+
+
 
 # MAIN PROGRAM
 
@@ -76,9 +90,7 @@ load(DATABASE_NAME)
 # Main game loop
 anothergo = True
 while anothergo:
-    # display banner
-    print("\nGUESSING GAME")
-    print("Think of an animal")
+    banner()
 
     finished = False
     pos = 0
@@ -87,18 +99,12 @@ while anothergo:
     while not finished:
         # Ask the next question
         
-        # is it an empty list?
         if isDatabaseEmpty():
             # no questions to ask, so just learn an answer
             name = raw_input("What is it? ")
-            
-            # add new item to the tree
-            words.append(name)
-            yes.append(None)
-            no.append(None)
+            appendLeaf(name)
             finished = True
 
-        # is it a leaf node?
         elif isLeaf(pos):
             # ask a terminating question
             gotit = raw_input("Is it a " + words[pos] + "? ")
@@ -117,30 +123,25 @@ while anothergo:
                 a = raw_input("What is the answer to this question for " + name + "? ")
                 
                 # Move existing leaf node to a new node
-                words.append(words[pos])
-                yes.append(None)
-                no.append(None)
+                appendLeaf(words[pos])
                 
-                #add new leaf node for new name
-                words.append(name)
-                yes.append(None)
-                no.append(None)
+                # add new leaf node for new name
+                appendLeaf(name)
 
                 # Change old leaf node into a branch node with the question
                 words[pos] = q
-
+                
                 # wire up the yes/no branches correctly
                 if a == "yes": # yes branch goes to new item
-                    yes[pos] = len(words)-1
-                    no[pos]  = len(words)-2
+                    yes[pos] = len(words)-1 # pos of new answer leaf
+                    no[pos]  = len(words)-2 # pos of last asked leaf
                 else: # no branch goes to new item
-                    no[pos]  = len(words)-1
-                    yes[pos] = len(words)-2
+                    no[pos]  = len(words)-1 # pos of new answer leaf
+                    yes[pos] = len(words)-2 # pos of last asked leaf
 
             finished = True
 
-        # It must be a branch node with two outcomes
-        else:
+        else: # must be a branch node with two outcomes
             # ask the question
             a = raw_input(words[pos] + "? ")
             if a == "yes":
