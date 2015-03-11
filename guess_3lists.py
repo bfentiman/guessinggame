@@ -121,30 +121,28 @@ while anothergo:
                 q = raw_input("Please give a question to distinguish between " + words[pos] + " and " + name + ":" )
                 # ask answer for your new item
                 a = raw_input("What is the answer to this question for " + name + "? ")
+
+                # Restructure the tree to account for question and new answer
                 
-                # Move existing leaf node to a new node
-                appendLeaf(words[pos])
-                
-                # add new leaf node for new name
-                appendLeaf(name)
+                appendLeaf(words[pos]) # move existin leaf node to a new node
+                appendLeaf(name) # add a new leaf node for the new name
 
                 # work out positions of two leafs, for ease of use later
                 lastpos = len(words)-2 # pos of last asked leaf
                 newpos  = len(words)-1 # pos of new answer leaf
-                
-                # Change old leaf node into a branch node with the question and two answers
-                words[pos] = q
 
-                # wire up the yes/no branches correctly
+                # Change old leaf node into a branch node with the question and two answers
                 if a == "yes":
                     yespos = newpos
                     nopos  = lastpos
                 else:
                     yespos = lastpos
-                    nopos  = newpos                    
+                    nopos  = newpos
 
-                yes[pos] = yespos
-                no[pos]  = nopos
+                #makeBranch(pos, q, yespos, nopos)
+                words[pos] = q
+                yes[pos]   = yespos
+                no[pos]    = nopos
 
             finished = True
 
