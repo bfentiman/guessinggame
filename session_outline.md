@@ -1,7 +1,7 @@
 
-#Machine Learning for Dummies
+# Machine Learning for Dummies
 
-###Running order of session
+### Running order of session
 | Time for Activity|Activity|           |
 | :--------------: |:------:|
 | 10 - 15 mins     | Allowing the kids to play with the machine learning code to see if they can understand what is going on |
@@ -13,5 +13,5 @@
 *  Paper/Pens
 *  Screen to project on
 
-###Aim
+### Aim
 * To give a basic understanding of machine learning
